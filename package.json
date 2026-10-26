@@ -1,0 +1,20 @@
+{
+  "name": "blockcity",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Blockcity: a platform of small 3D places in the browser - obby, race, lava, coins, sandbox, slide - with an avatar (three.js, fan concept)",
+  "author": "ALEXalesha",
+  "license": "MIT",
+  "homepage": "https://alexalesha.github.io/BlockCity/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ALEXalesha/BlockCity.git"
+  },
+  "scripts": {
+    "test": "playwright test",
+    "screenshots": "node tools/screenshots.js"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.62.1"
+  }
+}
