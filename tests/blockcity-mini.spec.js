@@ -111,8 +111,8 @@ test.describe('blockcity (Блоксити): лаунчер', () => {
     expect(await page.evaluate(() => ({ menu: __blox.game.menuOpen, paused: __blox.game.paused }))).toEqual({ menu: true, paused: true });
     expect(await page.evaluate(() => __blox.game.time)).toBe(t);
     await page.locator('#m-resume').click();
-    await page.waitForTimeout(300);
-    expect(await page.evaluate(() => __blox.game.time)).toBeGreaterThan(t);
+    // время идёт по кадрам: ждём, пока оно сдвинется, а не 300 мс (на CI без видеокарты кадры редкие)
+    await expect.poll(() => page.evaluate(() => __blox.game.time)).toBeGreaterThan(t);
   });
 
   test('оболочка ОС: postMessage({mix:"pause"}) - пауза как при скрытой вкладке; "resume" паузу не снимает; meta с именем', async ({ page }) => {
@@ -133,8 +133,8 @@ test.describe('blockcity (Блоксити): лаунчер', () => {
     await page.waitForTimeout(400);
     expect(await page.evaluate(() => ({ time: __blox.game.time, paused: __blox.game.paused }))).toEqual({ time: t, paused: true });
     await page.locator('#m-resume').click();
-    await page.waitForTimeout(300);
-    expect(await page.evaluate(() => __blox.game.time)).toBeGreaterThan(t);
+    // время идёт по кадрам: ждём, пока оно сдвинется, а не 300 мс (на CI без видеокарты кадры редкие)
+    await expect.poll(() => page.evaluate(() => __blox.game.time)).toBeGreaterThan(t);
   });
 
   test('мелочи: NumpadEnter отправляет в чат; L выходит только со второго раза; «Ещё раз» в обби гасит флажки', async ({ page }) => {
